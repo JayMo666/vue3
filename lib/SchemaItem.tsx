@@ -3,6 +3,7 @@ import NumberField from './fields/NumberField.vue'
 // import StringField from './fields/StringField'
 import StringField from './fields/StringField.vue'
 import ObjectField from './fields/ObjectField'
+import ArrayField from './fields/ArrayField'
 import { Schema, SchemaTypes, FiledPropsDefine } from './types'
 import { retrieveSchema } from './utils'
 export default defineComponent({
@@ -29,6 +30,10 @@ export default defineComponent({
         }
         case SchemaTypes.OBJECT: {
           ComPonent = ObjectField
+          break
+        }
+        case SchemaTypes.ARRAY: {
+          ComPonent = ArrayField
           break
         }
         default: {
