@@ -1,11 +1,19 @@
-import { defineComponent, Prop, PropType } from 'vue'
+import { defineComponent } from 'vue'
+
+import { FiledPropsDefine } from '../types'
 
 export default defineComponent({
-  name: 'StringField',
-  props: {},
-  setup(porps) {
+  name: 'StringFeild',
+  props: FiledPropsDefine,
+  setup(props) {
+    const handleChange = (e: any) => {
+      console.log(e)
+      props.onChange(e.target.value)
+    }
     return () => {
-      return <div>String field</div>
+      return (
+        <input type="text" value={props.value as any} onInput={handleChange} />
+      )
     }
   },
 })

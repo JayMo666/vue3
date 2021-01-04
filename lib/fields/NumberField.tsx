@@ -1,12 +1,25 @@
 import { FiledPropsDefine } from '../types'
-import { defineComponent, Prop, PropType } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'NumberField',
+  name: 'NumberFeild',
   props: FiledPropsDefine,
-  setup(porps) {
+  setup(props) {
+    const handleChange = (e: any) => {
+      const value = e.target.value
+
+      const num = Number(value)
+
+      if (Number.isNaN(num)) {
+        props.onChange(undefined)
+      } else {
+        props.onChange(num)
+      }
+    }
+
     return () => {
-      return <div>number field</div>
+      const { value } = props
+      return <input value={value as any} type="number" onInput={handleChange} />
     }
   },
 })

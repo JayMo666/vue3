@@ -1,12 +1,24 @@
-import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mount } from '@vue/test-utils'
+import { defineComponent, h } from 'vue'
+import JsonSchemaForm, { NumberField } from '../../lib'
+// import HelloWorld from '@/components/HelloWorld'
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg },
+describe('HelloWorld.tsx', () => {
+  it('should render corret number field', () => {
+    let value = ''
+    const wrapper = mount(JsonSchemaForm, {
+      props: {
+        schema: {
+          type: 'number'
+        },
+        value: value,
+        onChange: (v: any) => {
+          value = v as string
+        },
+      },
     })
-    expect(wrapper.text()).toMatch(msg)
+
+    const numberFiled = wrapper.findComponent(NumberField)
+    expect(numberFiled.exists()).toBeTruthy()
   })
 })
