@@ -2,7 +2,9 @@ import { defineComponent, PropType } from 'vue'
 import { FiledPropsDefine, Schema } from '../types'
 import { useVJSFContext } from '../context'
 import { createUseStyles } from 'vue-jss'
-
+import { getWidget } from '../theme'
+// import SelectionWidget from '../widgets/Selection'
+import { SeletionWidgetNames } from '../types'
 const useStyles = createUseStyles({
   container: {
     border: '1px solid #eee',
@@ -47,8 +49,10 @@ const ArrayItemWrapper = defineComponent({
   },
   setup(props, { slots }) {
     const classesRef = useStyles()
+    const context = useVJSFContext()
     return () => {
       const classes = classesRef.value
+
       const handleAdd = () => props.onAdd(props.index)
       const handleDelete = () => props.onDelete(props.index)
 
@@ -120,7 +124,9 @@ export default defineComponent({
       arr.splice(index + 1, 0, item[0])
       props.onChange(arr)
     }
+    const SelectionWidgetRef = getWidget(SeletionWidgetNames.SelectionWidget)
     return () => {
+      const SelectionWidget = SelectionWidgetRef.value
       const { schema, rootSchema, value } = props
       const SchemaItem = context.SchemaItem
       const isMultiType = Array.isArray(schema.items)
@@ -161,6 +167,19 @@ export default defineComponent({
             </ArrayItemWrapper>
           )
         })
+      } else {
+        const enumOptions = (schema as any).items.enum
+        const options = enumOptions.map((e: any) => ({
+          key: e,
+          value: e,
+        }))
+        return (
+          <SelectionWidget
+            onChange={props.onChange}
+            value={props.value}
+            options={options}
+          />
+        )
       }
       return
     }

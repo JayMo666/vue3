@@ -4,7 +4,7 @@ import JsonSchemaForm, { NumberField } from '../../lib'
 // import HelloWorld from '@/components/HelloWorld'
 
 describe('HelloWorld.tsx', () => {
-  it('should render corret number field', () => {
+  it('should render corret number field', async () => {
     let value = ''
     const wrapper = mount(JsonSchemaForm, {
       props: {
@@ -20,5 +20,10 @@ describe('HelloWorld.tsx', () => {
 
     const numberFiled = wrapper.findComponent(NumberField)
     expect(numberFiled.exists()).toBeTruthy()
+    // await numberFiled.props('onChange')('123')
+    const input = numberFiled.find('input')
+    input.element.value = '123'
+    input.trigger('input')
+    expect(value).toBe(123)
   })
 })

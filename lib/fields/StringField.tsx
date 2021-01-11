@@ -1,19 +1,20 @@
 import { defineComponent } from 'vue'
 
-import { FiledPropsDefine } from '../types'
-
+import { CommonWidgetNames, FiledPropsDefine } from '../types'
+import { getWidget } from '../theme'
 export default defineComponent({
   name: 'StringFeild',
   props: FiledPropsDefine,
   setup(props) {
-    const handleChange = (e: any) => {
-      console.log(e)
-      props.onChange(e.target.value)
+    const textWidgetRef = getWidget(CommonWidgetNames.TextWidget)
+    const hanldeChange = (v: string) => {
+      props.onChange(v)
     }
     return () => {
-      return (
-        <input type="text" value={props.value as any} onInput={handleChange} />
-      )
+      const { schema, rootSchema, ...rest } = props
+      // 组件首字母大写
+      const TextWidget = textWidgetRef.value
+      return <TextWidget {...rest} onChange={hanldeChange} />
     }
   },
 })

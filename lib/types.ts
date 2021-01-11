@@ -72,3 +72,39 @@ export const FiledPropsDefine = {
 
 // export type CommonFieldType = typeof TypeHelperComponent
 export type CommonFieldType = DefineComponent<typeof FiledPropsDefine>
+
+export const CommonWidgetPropsDefine = {
+  value: {},
+  onChange: {
+    type: Function as PropType<(v: any) => void>,
+    required: true,
+  },
+} as const
+export type CommonWidgetDefine = DefineComponent<typeof CommonWidgetPropsDefine>
+export const SelectionWidgetPropsDefine = {
+  ...CommonWidgetPropsDefine,
+  options: {
+    type: Array as PropType<
+      {
+        key: string
+        value: any
+      }[]
+    >,
+    required: true,
+  },
+} as const
+export type SelectionzWidgetDefine = DefineComponent<typeof SelectionWidgetPropsDefine>
+export enum SeletionWidgetNames {
+  SelectionWidget = 'SelectionWidget'
+}
+export enum CommonWidgetNames {
+  TextWidget = 'TextWidget',
+  NumberWidget = 'NumberWidget'
+}
+export interface Theme {
+  widgets: {
+    [SeletionWidgetNames.SelectionWidget]: SelectionzWidgetDefine
+    [CommonWidgetNames.TextWidget]: CommonWidgetDefine
+    [CommonWidgetNames.NumberWidget]: CommonWidgetDefine
+  }
+}
