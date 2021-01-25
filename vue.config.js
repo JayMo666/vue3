@@ -4,6 +4,8 @@ const isLib =
   process.env &&
   process.env.npm_lifecycle_script &&
   process.env.npm_lifecycle_script.includes('--type lib')
+const isCI = process.env.CI
+console.log('isCI', isCI)
 module.exports = {
   configureWebpack(config) {},
   chainWebpack(config) {

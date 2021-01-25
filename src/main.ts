@@ -1,6 +1,6 @@
 import { createApp, defineComponent, h } from 'vue'
 // import App from "./App.vue";
-import App from './App'
+import App from './VueDemo'
 // import HelloWorld from './components/HelloWorld.vue'
 // const img = require('./assets/logo.png') // eslint-disable-line
 

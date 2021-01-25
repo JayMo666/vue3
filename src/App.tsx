@@ -64,7 +64,6 @@ const useStyles = createUseStyles({
     },
   },
 })
-
 export default defineComponent({
   setup() {
     const selectedRef: Ref<number> = ref(0)
