@@ -1,12 +1,13 @@
 import { mount } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
-import JsonSchemaForm, { NumberField } from '../../lib'
+import { NumberField } from '../../lib'
 // import HelloWorld from '@/components/HelloWorld'
+import TestComponent from './utils/TestComponent'
 
 describe('HelloWorld.tsx', () => {
   it('should render corret number field', async () => {
     let value = ''
-    const wrapper = mount(JsonSchemaForm, {
+    const wrapper = mount(TestComponent, {
       props: {
         schema: {
           type: 'number'
